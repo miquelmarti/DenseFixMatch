@@ -1,0 +1,5 @@
+datasets_dir: ${oc.env:TMPDIR}/datasets
+output_dir: ${oc.env:TMPDIR}/output
+num_workers: 8
+cpu: false
+fp16: true

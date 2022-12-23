@@ -1,0 +1,34 @@
+defaults:
+  - /task@tasks.semantic: semantic_segmentation
+  - _self_
+
+tasks:
+  semantic:
+    num_classes: 21
+    background_class: 0
+
+# dataset params
+name: voc 
+seed: ${seed}
+traindev_split_size: ${evaluation.size}
+repeat: null
+null_target: -1
+num_classes: 21
+download: false
+num_labels: null
+label_ratio: null
+image_size: [512, 512]
+year: "2012"
+use_augmented_set: true
+use_implicit_setting: false
+
+# dataloader params
+batch_size: ${training.batch_size}
+eval_batch_size: ${evaluation.batch_size}
+bs_unlabeled_factor: ${training.bs_unlabeled_factor}
+use_all_as_unlabeled: false
+num_workers: ${oc.select:system.num_workers,null}
+eval_num_workers: ${dataset.num_workers}
+shuffle: true
+pin_memory: true
+augmentation: std

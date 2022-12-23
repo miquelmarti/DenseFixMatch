@@ -1,0 +1,35 @@
+name: fixmatch_rn50_1488
+project: cityscapes
+command:
+- ${env}
+- ${interpreter}
+- ${program}
+- torch.distributed.run
+- --nproc_per_node=2
+- scripts/train_and_evaluate.py
+- --config-name=cityscapes
+- model.encoder.arch=resnet50
+- dataset.image_size=[800,800]
+- dataset.num_labels=1488
+- dataset.tasks.semantic.ohem=false
+- training.batch_size=4
+- training.bs_unlabeled_factor=1
+- training.num_epochs=480
+- +training.pseudotargets_on_ema=true
+- training.optimizer.lr=0.01
+- training.optimizer.weight_decay=0.0005
+- evaluation.batch_size=2
+- evaluation.epoch_interval=1
+- evaluation.evaluator.log_samples=2
+- +ssl=fixmatch
+- ssl.confidence_threshold=0.5
+- ssl.dense=true
+- +wandb=cityscapes
+- '+wandb.tags=[semantic, fixmatch]'
+- system.fp16=true
+- ${args_no_hyphens}
+method: grid
+parameters:
+  seed:
+    values: [2, 3, 4, 5]
+program: -m

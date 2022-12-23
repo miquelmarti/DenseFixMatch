@@ -1,0 +1,5 @@
+type: classification
+num_classes: ${oc.select:dataset.num_classes, ???}
+label_ratio: ${oc.select:dataset.label_ratio, null}
+num_labels: ${oc.select:dataset.num_labels, null}
+null_target: ${oc.select:dataset.null_target, -100}

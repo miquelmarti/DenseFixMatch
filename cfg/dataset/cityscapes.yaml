@@ -1,0 +1,36 @@
+defaults:
+  - /task@tasks.semantic: semantic_segmentation
+  - _self_
+
+tasks:
+  semantic:
+    num_classes: 19
+
+# dataset params
+name: cityscapes
+seed: ${seed}
+traindev_split_size: ${evaluation.size}
+repeat: null
+balanced: true
+null_target: -1
+num_classes: 19
+download: false
+num_labels: null
+label_ratio: null
+image_size: [800, 800]
+mode: fine
+use_sequences: false
+extend_with_extra: false
+use_coarse: false
+use_implicit_setting: false
+
+# dataloader params
+batch_size: ${training.batch_size}
+eval_batch_size: ${evaluation.batch_size}
+bs_unlabeled_factor: ${training.bs_unlabeled_factor}
+use_all_as_unlabeled: false
+num_workers: ${oc.select:system.num_workers,null}
+eval_num_workers: ${dataset.num_workers}
+shuffle: true
+pin_memory: true
+augmentation: std

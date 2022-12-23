@@ -1,0 +1,4 @@
+path: ???  # path defined on runtime via command line or dynamic configuration
+type: local_file
+resume: false
+load_metadata: false

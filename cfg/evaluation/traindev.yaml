@@ -1,0 +1,13 @@
+defaults:
+  - evaluator: std
+  - _self_
+set: traindev
+batch_size: 2
+track_best: on
+use_ema_metrics: off
+use_ema_weights: on
+patience_epochs: null
+size: .1
+epoch_interval: 10
+keep_all: off
+keep_all_best: off

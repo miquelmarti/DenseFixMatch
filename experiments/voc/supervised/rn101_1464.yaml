@@ -1,0 +1,21 @@
+name: supervised_rn101_1464
+project: voc
+command:
+- ${env}
+- ${interpreter}
+- ${program}
+- --config-name=voc
+- model.encoder.arch=resnet101
+- dataset.use_augmented_set=false
+- training.batch_size=16
+- training.num_epochs=578
+- evaluation.epoch_interval=2
+- evaluation.evaluator.log_samples=2
+- +wandb=voc
+- '+wandb.tags=[semantic, resizecrop, baseline]'
+- ${args_no_hyphens}
+method: grid
+parameters:
+  seed:
+    values: [2, 3, 4, 5]
+program: scripts/train_and_evaluate.py

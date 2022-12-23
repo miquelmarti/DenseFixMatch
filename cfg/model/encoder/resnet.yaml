@@ -1,0 +1,4 @@
+_target_: models.resnet.Resnet
+arch: resnet18
+pretrained: ${oc.select:training.pretrained, false}
+small_images: false

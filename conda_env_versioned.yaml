@@ -1,0 +1,25 @@
+name: ssl2
+channels:
+  - anaconda
+  - conda-forge
+  - defaults
+  - nvidia
+  - pytorch
+dependencies:
+  - imageio=2.19.3
+  - pandas=1.4.3
+  - plotly=5.9.0
+  - pip
+  - pytorch=1.13.0
+  - pytorch-cuda=11.7
+  - tensorboard=2.8.0
+  - tensorboardx=2.2
+  - torchvision=0.14.0
+  - pip:
+    - accelerate==0.14.0
+    - hydra-core==1.2.0
+    - omegaconf==2.2.3
+    - pyyaml==6.0
+    - tqdm==4.64.1
+    - wandb==0.13.5
+    - kornia==0.6.9

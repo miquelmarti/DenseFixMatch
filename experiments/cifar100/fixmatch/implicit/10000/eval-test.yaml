@@ -1,0 +1,25 @@
+name: fixmatch_implicit_10000_test
+project: cifar100_ssl
+command:
+- ${env}
+- ${interpreter}
+- ${program}
+- --config-name=cifar100
+- +wandb=cifar100
+- dataset.num_labels=10000
+- dataset.seed=${seed}
+- training.num_epochs=1000
+- dataset.use_implicit_setting=true
+- +ssl=fixmatch
+- evaluation=val+test
+- evaluation.epoch_interval=1
+- training.batch_size=128
+- training.optimizer.lr=0.003
+- ssl.consistency_weight_max=1
+- ${args_no_hyphens}
+method: grid
+parameters:
+  seed:
+    distribution: categorical
+    values: [1, 2, 3, 4, 5]
+program: scripts/train_and_evaluate.py

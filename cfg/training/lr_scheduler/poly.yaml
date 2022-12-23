@@ -1,0 +1,3 @@
+_target_: utils.utils.PolynomialLR
+gamma: .9
+max_iter: ${training.num_epochs}

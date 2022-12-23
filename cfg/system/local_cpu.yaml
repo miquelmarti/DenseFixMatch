@@ -1,0 +1,5 @@
+datasets_dir: /datasets
+output_dir: /output/ssl
+num_workers: 4
+cpu: true
+fp16: false

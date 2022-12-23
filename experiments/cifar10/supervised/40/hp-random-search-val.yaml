@@ -1,0 +1,26 @@
+name: supervised_40_hp_random_search
+project: cifar10_ssl
+command:
+- ${env}
+- ${interpreter}
+- ${program}
+- --config-name=cifar10
+- +wandb=cifar10
+- dataset.num_labels=40
+- dataset.augmentation=randaug
+- dataset.repeat=1125 # 45000 / 40
+- training.bs_unlabeled_factor=0
+- training.num_epochs=1000
+- evaluation.patience_epochs=100
+- ${args_no_hyphens}
+method: random
+parameters:
+  training.batch_size:
+    distribution: categorical
+    values: [64, 128, 256, 512]
+  training.optimizer.lr:
+    distribution: q_log_uniform
+    max: -0.69  # 0.5
+    min: -6.9  # 0.001
+    q: 0.001
+program: scripts/train_and_evaluate.py

@@ -1,0 +1,18 @@
+defaults:
+  - system: ${oc.env:HYDRA_SYSTEM_CONFIG}
+  - dataset: voc
+  - training: voc
+  - evaluation: validation
+  - model: resnet101_deeplabv3+
+  - ckpt_manager: best_and_last
+  - _self_
+
+seed: 1
+hydra:
+  run:
+    dir: ${system.output_dir}/${hydra.job.name}/${now:%Y-%m-%d_%H-%M-%S}/${oc.env:SLURM_JOB_ID,""}
+  job:
+    chdir: true
+evaluation:
+  batch_size: 1
+  size: 0.

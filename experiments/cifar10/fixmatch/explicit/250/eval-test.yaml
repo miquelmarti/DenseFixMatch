@@ -1,0 +1,26 @@
+name: fixmatch_explicit_250_test
+project: cifar10_ssl
+command:
+- ${env}
+- ${interpreter}
+- ${program}
+- --config-name=cifar10
+- +wandb=cifar10
+- dataset.num_labels=250
+- dataset.seed=${seed}
+- training.num_epochs=875
+- dataset.use_all_as_unlabeled=true
+- +ssl=fixmatch
+- evaluation=val+test
+- evaluation.epoch_interval=1
+- training.batch_size=32
+- training.bs_unlabeled_factor=7
+- training.optimizer.lr=0.026
+- ssl.consistency_weight_max=1.9
+- ${args_no_hyphens}
+method: grid
+parameters:
+  seed:
+    distribution: categorical
+    values: [1, 2, 3, 4, 5]
+program: scripts/train_and_evaluate.py

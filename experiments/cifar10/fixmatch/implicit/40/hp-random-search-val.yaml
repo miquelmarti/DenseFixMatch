@@ -1,0 +1,30 @@
+name: fixmatch_implicit_40_hp_random_search
+project: cifar10_ssl
+command:
+- ${env}
+- ${interpreter}
+- ${program}
+- --config-name=cifar10
+- +wandb=cifar10
+- dataset.num_labels=40
+- training.num_epochs=1000
+- dataset.use_implicit_setting=true
+- +ssl=fixmatch
+- evaluation.patience_epochs=100
+- ${args_no_hyphens}
+method: random
+parameters:
+  training.batch_size:
+    distribution: categorical
+    values: [64, 128, 256, 512]
+  training.optimizer.lr:
+    distribution: q_log_uniform
+    max: -0.69  # 0.5
+    min: -6.9  # 0.001
+    q: 0.001
+  ssl.consistency_weight_max:
+    distribution: q_log_uniform
+    max: 2.3  # 10
+    min: -2.3  # 0.1
+    q: 0.1
+program: scripts/train_and_evaluate.py

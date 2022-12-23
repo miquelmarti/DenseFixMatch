@@ -1,0 +1,27 @@
+name: supervised_rn50_372
+project: cityscapes
+command:
+- ${env}
+- ${interpreter}
+- ${program}
+- --config-name=cityscapes
+- model.encoder.arch=resnet50
+- dataset.image_size=[800,800]
+- dataset.num_labels=372
+- dataset.tasks.semantic.ohem=false
+- training.batch_size=8
+- training.num_epochs=1919
+- training.optimizer.lr=0.01
+- training.optimizer.weight_decay=0.0005
+- evaluation.batch_size=2
+- evaluation.epoch_interval=8
+- evaluation.evaluator.log_samples=2
+- +wandb=cityscapes
+- '+wandb.tags=[semantic, resizecrop, baseline]'
+- system.fp16=true
+- ${args_no_hyphens}
+method: grid
+parameters:
+  seed:
+    values: [2, 3, 4, 5]
+program: scripts/train_and_evaluate.py

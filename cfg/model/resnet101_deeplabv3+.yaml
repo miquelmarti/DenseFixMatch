@@ -1,0 +1,12 @@
+defaults:
+  - encoder: resnet
+  - decoder@decoder.semantic: deeplabv3+
+  - _self_
+ 
+encoder:
+  arch: resnet101
+  final_pooling: false
+  fpn: true
+  multi_grid: true
+  replace_stride_with_dilation: [false, true, true]
+  zero_init_residual: true

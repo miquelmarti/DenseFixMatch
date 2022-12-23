@@ -1,0 +1,4 @@
+path: ???  # path defined on runtime as run_path:filename or simply run_path if artifact has a single file
+type: wandb_artifact
+resume: false
+load_metadata: false

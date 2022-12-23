@@ -1,0 +1,7 @@
+_target_: ssl_methods.fixmatch.FixMatch
+consistency_weight_max: 1.
+confidence_threshold: .95
+null_target: ${oc.select:dataset.null_target, ???}
+use_all: false
+ohem: false
+dense: false

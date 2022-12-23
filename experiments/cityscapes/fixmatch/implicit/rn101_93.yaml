@@ -1,0 +1,38 @@
+name: fixmatch_rn101_93_implicit
+project: cityscapes
+command:
+- ${env}
+- ${interpreter}
+- ${program}
+- torch.distributed.run
+- --rdzv_backend=c10d
+- --rdzv_endpoint=localhost:0
+- --nnodes=1
+- --nproc_per_node=4
+- scripts/train_and_evaluate.py
+- --config-name=cityscapes
+- model.encoder.arch=resnet101
+- dataset.image_size=[800,800]
+- dataset.num_labels=93
+- dataset.tasks.semantic.ohem=false
+- training.batch_size=4
+- dataset.use_implicit_setting=true
+- training.num_epochs=240
+- +training.pseudotargets_on_ema=true
+- training.optimizer.lr=0.01
+- training.optimizer.weight_decay=0.0005
+- evaluation.batch_size=2
+- evaluation.epoch_interval=1
+- evaluation.evaluator.log_samples=2
+- +ssl=fixmatch
+- ssl.confidence_threshold=0.5
+- ssl.dense=true
+- +wandb=cityscapes
+- '+wandb.tags=[semantic, fixmatch]'
+- system.fp16=true
+- ${args_no_hyphens}
+method: grid
+parameters:
+  seed:
+    values: [2, 3, 4, 5]
+program: -m

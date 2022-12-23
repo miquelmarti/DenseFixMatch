@@ -1,0 +1,33 @@
+name: fixmatch_implicit_rn101_1464
+project: voc
+command:
+- ${env}
+- ${interpreter}
+- ${program}
+- torch.distributed.run
+- --rdzv_backend=c10d
+- --rdzv_endpoint=localhost:0
+- --nnodes=1
+- --nproc_per_node=2
+- scripts/train_and_evaluate.py
+- --config-name=voc
+- model.encoder.arch=resnet101
+- dataset.num_labels=1464
+- dataset.use_augmented_set=true
+- dataset.use_implicit_setting=true
+- training.num_epochs=80
+- training.batch_size=16
+- +training.pseudotargets_on_ema=true
+- +ssl=fixmatch
+- ssl.confidence_threshold=0.5
+- ssl.dense=true
+- evaluation.epoch_interval=1
+- evaluation.evaluator.log_samples=2
+- +wandb=voc
+- '+wandb.tags=[semantic, fixmatch]'
+- ${args_no_hyphens}
+method: grid
+parameters:
+  seed:
+    values: [2, 3, 4, 5]
+program: -m

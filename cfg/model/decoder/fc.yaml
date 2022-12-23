@@ -1,0 +1,3 @@
+_target_: models.custom.FlattenLinear
+in_features: ???
+num_classes: ${oc.select:dataset.task.num_classes,dataset.task.${parent_key:}.num_classes}

@@ -1,0 +1,18 @@
+defaults:
+  - optimizer: sgd
+  - lr_scheduler: poly
+  - _self_
+
+null_target: ${dataset.null_target}
+num_epochs: 80
+batch_size: 8
+bs_unlabeled_factor: null
+freeze_bn: false
+ema_decay: 0.99
+pretrained: true
+optimizer:
+  lr: 1e-3
+  momentum: .9
+  nesterov: True
+  weight_decay: 5.e-4
+log_samples: null

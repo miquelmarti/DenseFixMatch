@@ -1,0 +1,4 @@
+_target_: models.wideresnet.WideResNet
+depth: 28
+widen_factor: 2
+dropout: 0.

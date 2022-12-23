@@ -1,0 +1,22 @@
+name: supervised_all_test
+project: cifar10_ssl
+command:
+- ${env}
+- ${interpreter}
+- ${program}
+- --config-name=cifar10
+- +wandb=cifar10
+- dataset.augmentation=randaug
+- dataset.seed=${seed}
+- training.bs_unlabeled_factor=0
+- training.num_epochs=1000
+- evaluation=val+test
+- evaluation.epoch_interval=1
+- training.batch_size=512
+- training.optimizer.lr=0.22
+- ${args_no_hyphens}
+method: grid
+parameters:
+  seed:
+    values: [1, 2, 3, 4, 5]
+program: scripts/train_and_evaluate.py

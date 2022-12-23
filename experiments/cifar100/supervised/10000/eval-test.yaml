@@ -1,0 +1,25 @@
+name: supervised_10000_test
+project: cifar100_ssl
+command:
+- ${env}
+- ${interpreter}
+- ${program}
+- --config-name=cifar100
+- +wandb=cifar100
+- dataset.num_labels=10000
+- dataset.augmentation=randaug
+- dataset.repeat=4 # 45000 / 10000
+- dataset.seed=${seed}
+- training.bs_unlabeled_factor=0
+- training.num_epochs=1000
+- evaluation=val+test
+- evaluation.epoch_interval=1
+- training.batch_size=64
+- training.optimizer.lr=0.03
+- ${args_no_hyphens}
+method: grid
+parameters:
+  seed:
+    distribution: categorical
+    values: [1, 2, 3, 4, 5]
+program: scripts/train_and_evaluate.py

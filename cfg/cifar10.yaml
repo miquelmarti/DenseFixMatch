@@ -1,0 +1,15 @@
+defaults:
+  - system: ${oc.env:HYDRA_SYSTEM_CONFIG}
+  - dataset: cifar10
+  - training: cifar10
+  - evaluation: validation
+  - model: wrn_28_2_cifar10
+  - ckpt_manager: best_and_last
+  - _self_
+
+seed: 1
+hydra:
+  run:
+    dir: ${system.output_dir}/${hydra.job.name}/${now:%Y-%m-%d_%H-%M-%S}/${oc.env:SLURM_JOB_ID,""}
+  job:
+    chdir: true

@@ -1,0 +1,7 @@
+defaults:
+  - encoder: wrn
+  - decoder: fc
+  - _self_
+
+decoder:
+  in_features: 128  # 64 * widen_factor

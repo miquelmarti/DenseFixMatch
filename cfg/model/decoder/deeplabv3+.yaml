@@ -1,0 +1,5 @@
+_target_: models.deeplab.DeepLabv3plus
+in_planes: 2048
+num_classes: ${oc.select:dataset.task.num_classes,${dataset.tasks.${parent_key:}.num_classes}}
+inner_planes: 256
+dilations: [12, 24, 36]

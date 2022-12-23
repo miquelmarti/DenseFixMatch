@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# 1 - number of trials
+# 2 - number of agents
+# 3 - sbatch file
+# 4 - conda env name
+# 5 - wandb sweep id
+
+sbatch -J sweep_$5 --array 1-$1%$2 $3 $4 "wandb agent --count 1 $5"
